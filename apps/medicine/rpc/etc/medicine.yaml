@@ -1,0 +1,15 @@
+Name: medicine.rpc
+ListenOn: 0.0.0.0:8000
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: medicine.rpc
+
+Mysql:
+  DataSource: root:root@tcp(mysql:3306)/medicine?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+CacheRedis:
+  - Host: redis:6379
+    Pass:
+    Type: node
+

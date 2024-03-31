@@ -1,0 +1,95 @@
+type MedicineInfo {
+	Id                uint64   `json:"id"`
+	Name              string   `json:"name"`
+	Alias             string   `json:"alias"`
+	Taste             string   `json:"taste"`
+	Meridian          string   `json:"meridian"`
+	Efficacy          string   `json:"efficacy"`
+	UsageDosage       string   `json:"usageDosage"`
+	Contraindications string   `json:"contraindications"`
+	ImageUrls         []string `json:"imageUrls"`
+}
+
+type (
+	ImageCreateRequest {
+		MedicineId uint64   `json:"medicineId"`
+		Urls       []string `json:"urls"`
+	}
+
+	ImageCreateResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+
+	ImageDelRequest {
+		Id uint64 `json:"id"`
+	}
+
+	ImageDelResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+
+	// 药品创建
+	MedicineCreateRequest {
+		Data *MedicineInfo `json:"data"`
+	}
+
+	MedicineCreateResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+
+	// 药品删除
+	MedicineDelRequest {
+		Id uint64 `json:"id"`
+	}
+
+	MedicineDelResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+
+	// 药品查找
+	MedicineFindRequest {
+		Id uint64 `json:"id"`
+	}
+
+	MedicineFindResponse {
+		Code    int64         `json:"code"`
+		Message string        `json:"message"`
+		Data    *MedicineInfo `json:"data"`
+	}
+
+	// 药品修改
+	MedicineModRequest {
+		Data *MedicineInfo `json:"data"`
+	}
+
+	MedicineModResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+)
+
+service Medicine {
+	@handler ImageCreate
+	post /api/image/create(ImageCreateRequest) returns (ImageCreateResponse)
+
+	@handler ImageDelete
+	post /api/image/delete(ImageDelRequest) returns (ImageDelResponse)
+}
+
+service Medicine {
+	@handler MedicineCreate
+	post /api/medicine/create(MedicineCreateRequest) returns (MedicineCreateResponse)
+
+	@handler MedicineDelete
+	post /api/medicine/delete(MedicineDelRequest) returns (MedicineDelResponse)
+
+	@handler MedicineFind
+	post /api/medicine/find(MedicineFindRequest) returns (MedicineFindResponse)
+
+	@handler MedicineMod
+	post /api/medicine/mod(MedicineModRequest) returns (MedicineModResponse)
+}

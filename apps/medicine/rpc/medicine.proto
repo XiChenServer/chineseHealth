@@ -1,0 +1,103 @@
+syntax = "proto3";
+package medicine;
+option go_package = "./medicine";
+
+// 中药基本信息
+message ChineseMedicineInfo {
+  int32 id = 1;
+  string name = 2;
+  string alias = 3;
+  string taste = 4;
+  string meridian = 5;
+  string efficacy = 6;
+  string usage_dosage = 7;
+  string contraindications = 8;
+  repeated string image_urls = 9; // 图片链接，可以是多个
+}
+
+message ImageInfo {
+  int64 id = 1;
+  int64 MedicineId  = 2;
+  string url = 3;
+}
+
+message ImageCreateRequest {
+  repeated string Urls = 1;
+  int64 MedicineId = 2;
+
+}
+
+message ImageCreteResponse{
+  int64 Code = 1;
+  string Message = 2;
+  repeated ImageInfo Data = 3;
+
+}
+
+message ImageDelRequest {
+  int64 id = 1;
+}
+
+message ImageDelResponse{
+  int64 Code = 1;
+  string Message = 2;
+}
+
+
+
+// 药品增加请求
+message MedicineCreateRequest {
+  ChineseMedicineInfo medicine_info = 1;
+}
+
+// 药品增加响应
+message MedicineCreateResponse {
+  int64 Code = 1;
+  string Message = 2;
+  ChineseMedicineInfo medicine_info = 3;
+}
+
+// 药品删除请求
+message MedicineDelRequest {
+  int32 id = 1;
+}
+
+// 药品删除响应
+message MedicineDelResponse {
+  int64 Code = 1;
+  string Message = 2;
+}
+
+// 药品查找请求
+message MedicineFindRequest {
+  int32 id = 1;
+}
+
+// 药品查找响应
+message MedicineFindResponse {
+  int64 Code = 1;
+  string Message = 2;
+  ChineseMedicineInfo medicine_info = 3;
+}
+
+// 药品修改请求
+message MedicineModRequest {
+  int32 id = 1;
+  ChineseMedicineInfo medicine_info = 2;
+}
+
+// 药品修改响应
+message MedicineModResponse {
+  int64 Code = 1;
+  string Message = 2;
+  ChineseMedicineInfo medicine_info = 3;
+}
+
+service Medicine {
+  rpc MedicineCreate(MedicineCreateRequest) returns (MedicineCreateResponse);
+  rpc MedicineDel(MedicineDelRequest) returns (MedicineDelResponse);
+  rpc MedicineMod(MedicineModRequest) returns (MedicineModResponse);
+  rpc MedicineFind(MedicineFindRequest) returns (MedicineFindResponse);
+  rpc ImageCreate(ImageCreateRequest) returns (ImageCreteResponse);
+  rpc ImageDelete(ImageDelRequest) returns (ImageDelResponse);
+}
