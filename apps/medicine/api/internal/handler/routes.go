@@ -19,6 +19,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
+				Path:    "/api/image/updata",
+				Handler: ImageUpdataHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/api/image/delete",
 				Handler: ImageDeleteHandler(serverCtx),
 			},

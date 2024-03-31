@@ -23,6 +23,12 @@ type ImageCreateResponse struct {
 	Message string `json:"message"`
 }
 
+type ImageUpdataResponse struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"`
+}
+
 type ImageDelRequest struct {
 	Id uint64 `json:"id"`
 }

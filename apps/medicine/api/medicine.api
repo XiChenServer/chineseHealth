@@ -20,7 +20,11 @@ type (
 		Code    int64  `json:"code"`
 		Message string `json:"message"`
 	}
-
+	ImageUpdataResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+		Data    string `json:"data"`
+	}
 	ImageDelRequest {
 		Id uint64 `json:"id"`
 	}
@@ -75,6 +79,9 @@ type (
 service Medicine {
 	@handler ImageCreate
 	post /api/image/create(ImageCreateRequest) returns (ImageCreateResponse)
+
+	@handler ImageUpdata
+	post /api/image/updata() returns (ImageUpdataResponse)
 
 	@handler ImageDelete
 	post /api/image/delete(ImageDelRequest) returns (ImageDelResponse)
