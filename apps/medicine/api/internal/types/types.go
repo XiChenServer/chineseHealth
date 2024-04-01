@@ -43,8 +43,9 @@ type MedicineCreateRequest struct {
 }
 
 type MedicineCreateResponse struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	Code    int64        `json:"code"`
+	Message string       `json:"message"`
+	Data    MedicineInfo `json:"data"`
 }
 
 type MedicineDelRequest struct {
@@ -71,6 +72,7 @@ type MedicineModRequest struct {
 }
 
 type MedicineModResponse struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    *MedicineInfo `json:"data"`
 }

@@ -40,8 +40,9 @@ type (
 	}
 
 	MedicineCreateResponse {
-		Code    int64  `json:"code"`
-		Message string `json:"message"`
+		Code    int64        `json:"code"`
+		Message string       `json:"message"`
+		Data    MedicineInfo `json:"data"`
 	}
 
 	// 药品删除
@@ -71,8 +72,9 @@ type (
 	}
 
 	MedicineModResponse {
-		Code    int64  `json:"code"`
-		Message string `json:"message"`
+		Code    int64         `json:"code"`
+		Message string        `json:"message"`
+		Data    *MedicineInfo `json:"data"`
 	}
 )
 

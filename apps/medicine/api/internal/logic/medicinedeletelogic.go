@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"chineseHealthy/apps/medicine/rpc/types/medicine"
 	"context"
 
 	"chineseHealthy/apps/medicine/api/internal/svc"
@@ -25,6 +26,12 @@ func NewMedicineDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 
 func (l *MedicineDeleteLogic) MedicineDelete(req *types.MedicineDelRequest) (resp *types.MedicineDelResponse, err error) {
 	// todo: add your logic here and delete this line
-
-	return
+	_, err = l.svcCtx.MedicineRpc.MedicineDel(l.ctx, &medicine.MedicineDelRequest{Id: int32(req.Id)})
+	if err != nil {
+		return nil, err
+	}
+	return &types.MedicineDelResponse{
+		Code:    200,
+		Message: "删除成功",
+	}, nil
 }

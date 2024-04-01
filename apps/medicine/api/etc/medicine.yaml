@@ -6,12 +6,12 @@ Mysql:
   DataSource: root:root@tcp(mysql:3306)/medicine?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
 CacheRedis:
-  - Host: redis:6379
+  - Host: 127.0.0.1:6379
     Pass:
     Type: node
 
 MedicineRpc:
   Etcd:
     Hosts:
-      - etcd:2379
+      - 127.0.0.1:2379
     Key: medicine.rpc

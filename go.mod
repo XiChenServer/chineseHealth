@@ -3,6 +3,7 @@ module chineseHealthy
 go 1.20
 
 require (
+	github.com/qiniu/go-sdk/v7 v7.19.1
 	github.com/zeromicro/go-zero v1.6.3
 	google.golang.org/grpc v1.62.0
 	google.golang.org/protobuf v1.32.0
@@ -70,6 +71,7 @@ require (
 	go.uber.org/zap v1.24.0 // indirect
 	golang.org/x/net v0.21.0 // indirect
 	golang.org/x/oauth2 v0.16.0 // indirect
+	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/sys v0.17.0 // indirect
 	golang.org/x/term v0.17.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
