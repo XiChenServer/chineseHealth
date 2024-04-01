@@ -27,7 +27,6 @@ func NewMedicineModLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Medic
 func (l *MedicineModLogic) MedicineMod(req *types.MedicineModRequest) (resp *types.MedicineModResponse, err error) {
 	// todo: add your logic here and delete this line
 	medicineInfo := medicine.ChineseMedicineInfo{
-		Id:                int32(req.Data.Id),
 		Name:              req.Data.Name,
 		Alias:             req.Data.Alias,
 		Taste:             req.Data.Taste,
@@ -35,7 +34,6 @@ func (l *MedicineModLogic) MedicineMod(req *types.MedicineModRequest) (resp *typ
 		Efficacy:          req.Data.Efficacy,
 		UsageDosage:       req.Data.UsageDosage,
 		Contraindications: req.Data.Contraindications,
-		ImageUrls:         req.Data.ImageUrls,
 	}
 	res, err := l.svcCtx.MedicineRpc.MedicineMod(l.ctx, &medicine.MedicineModRequest{MedicineInfo: &medicineInfo})
 	if err != nil {

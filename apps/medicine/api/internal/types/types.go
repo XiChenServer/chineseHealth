@@ -13,6 +13,16 @@ type MedicineInfo struct {
 	ImageUrls         []string `json:"imageUrls"`
 }
 
+type MedicineCreateInfo struct {
+	Name              string `json:"name"`
+	Alias             string `json:"alias"`
+	Taste             string `json:"taste"`
+	Meridian          string `json:"meridian"`
+	Efficacy          string `json:"efficacy"`
+	UsageDosage       string `json:"usageDosage"`
+	Contraindications string `json:"contraindications"`
+}
+
 type ImageCreateRequest struct {
 	MedicineId uint64   `json:"medicineId"`
 	Urls       []string `json:"urls"`
@@ -39,7 +49,7 @@ type ImageDelResponse struct {
 }
 
 type MedicineCreateRequest struct {
-	Data *MedicineInfo `json:"data"`
+	Data *MedicineCreateInfo `json:"data"`
 }
 
 type MedicineCreateResponse struct {
@@ -68,7 +78,7 @@ type MedicineFindResponse struct {
 }
 
 type MedicineModRequest struct {
-	Data *MedicineInfo `json:"data"`
+	Data *MedicineCreateInfo `json:"data"`
 }
 
 type MedicineModResponse struct {

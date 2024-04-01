@@ -10,6 +10,16 @@ type MedicineInfo {
 	ImageUrls         []string `json:"imageUrls"`
 }
 
+type MedicineCreateInfo {
+	Name              string `json:"name"`
+	Alias             string `json:"alias"`
+	Taste             string `json:"taste"`
+	Meridian          string `json:"meridian"`
+	Efficacy          string `json:"efficacy"`
+	UsageDosage       string `json:"usageDosage"`
+	Contraindications string `json:"contraindications"`
+}
+
 type (
 	ImageCreateRequest {
 		MedicineId uint64   `json:"medicineId"`
@@ -36,7 +46,7 @@ type (
 
 	// 药品创建
 	MedicineCreateRequest {
-		Data *MedicineInfo `json:"data"`
+		Data *MedicineCreateInfo `json:"data"`
 	}
 
 	MedicineCreateResponse {
@@ -68,7 +78,7 @@ type (
 
 	// 药品修改
 	MedicineModRequest {
-		Data *MedicineInfo `json:"data"`
+		Data *MedicineCreateInfo `json:"data"`
 	}
 
 	MedicineModResponse {

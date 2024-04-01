@@ -3,7 +3,7 @@ Host: 0.0.0.0
 Port: 9000
 
 Mysql:
-  DataSource: root:root@tcp(mysql:3306)/medicine?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  DataSource: root:root@tcp(127.0.0.1:3306)/medicine?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
 CacheRedis:
   - Host: 127.0.0.1:6379

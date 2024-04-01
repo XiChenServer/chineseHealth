@@ -35,7 +35,6 @@ func (l *MedicineCreateLogic) MedicineCreate(req *types.MedicineCreateRequest) (
 		Efficacy:          req.Data.Efficacy,
 		UsageDosage:       req.Data.UsageDosage,
 		Contraindications: req.Data.Contraindications,
-		ImageUrls:         req.Data.ImageUrls,
 	}
 	res, err := l.svcCtx.MedicineRpc.MedicineCreate(l.ctx, &medicine.MedicineCreateRequest{MedicineInfo: &medicineInfo})
 	if err != nil {
