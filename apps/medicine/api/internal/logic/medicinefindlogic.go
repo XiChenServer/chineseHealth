@@ -39,8 +39,17 @@ func (l *MedicineFindLogic) MedicineFind(req *types.MedicineFindRequest) (resp *
 		Efficacy:          res.MedicineInfo.Efficacy,
 		UsageDosage:       res.MedicineInfo.UsageDosage,
 		Contraindications: res.MedicineInfo.Contraindications,
-		ImageUrls:         res.MedicineInfo.ImageUrls,
 	}
+	var Info []*types.ImageInfo
+	for _, v := range res.MedicineInfo.ImageInfo {
+		newInfo := &types.ImageInfo{
+			Id:         v.Id,
+			MedicineId: v.MedicineId,
+			Url:        v.Url,
+		}
+		Info = append(Info, newInfo)
+	}
+	medicineInfo.ImageInfo = Info
 	return &types.MedicineFindResponse{
 		Code:    200,
 		Message: "查找成功",

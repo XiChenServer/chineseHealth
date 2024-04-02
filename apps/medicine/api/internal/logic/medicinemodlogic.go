@@ -40,7 +40,15 @@ func (l *MedicineModLogic) MedicineMod(req *types.MedicineModRequest) (resp *typ
 	if err != nil {
 		return nil, err
 	}
-
+	var Info []*types.ImageInfo
+	for _, v := range res.MedicineInfo.ImageInfo {
+		newInfo := &types.ImageInfo{
+			Id:         v.Id,
+			MedicineId: v.MedicineId,
+			Url:        v.Url,
+		}
+		Info = append(Info, newInfo)
+	}
 	return &types.MedicineModResponse{
 		Code:    200,
 		Message: "修改成功",
@@ -53,7 +61,7 @@ func (l *MedicineModLogic) MedicineMod(req *types.MedicineModRequest) (resp *typ
 			Efficacy:          res.MedicineInfo.Efficacy,
 			UsageDosage:       res.MedicineInfo.UsageDosage,
 			Contraindications: res.MedicineInfo.Contraindications,
-			ImageUrls:         res.MedicineInfo.ImageUrls,
+			ImageInfo:         Info,
 		},
 	}, nil
 }
