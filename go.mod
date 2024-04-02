@@ -3,6 +3,7 @@ module chineseHealthy
 go 1.20
 
 require (
+	github.com/pkg/errors v0.9.1
 	github.com/qiniu/go-sdk/v7 v7.19.1
 	github.com/zeromicro/go-zero v1.6.3
 	google.golang.org/grpc v1.62.0

@@ -2,6 +2,14 @@ syntax = "proto3";
 package medicine;
 option go_package = "./medicine";
 
+
+
+message ImageInfo {
+  int64 id = 1;
+  int64 MedicineId  = 2;
+  string url = 3;
+}
+
 // 中药基本信息
 message ChineseMedicineInfo {
   int32 id = 1;
@@ -12,26 +20,34 @@ message ChineseMedicineInfo {
   string efficacy = 6;
   string usage_dosage = 7;
   string contraindications = 8;
-  repeated string image_urls = 9; // 图片链接，可以是多个
+  repeated ImageInfo image_info = 9;
 }
 
-message ImageInfo {
-  int64 id = 1;
-  int64 MedicineId  = 2;
-  string url = 3;
+
+// 药品查找请求
+message MedicineFindRequest {
+  int32 id = 1;
 }
+
+// 药品查找响应
+message MedicineFindResponse {
+  int64 Code = 1;
+  string Message = 2;
+  ChineseMedicineInfo medicine_info = 3;
+}
+
+
+
 
 message ImageCreateRequest {
   repeated string Urls = 1;
   int64 MedicineId = 2;
-
 }
 
 message ImageCreteResponse{
   int64 Code = 1;
   string Message = 2;
-  repeated ImageInfo Data = 3;
-
+  ImageInfo Data = 3;
 }
 
 message ImageDelRequest {
@@ -68,17 +84,6 @@ message MedicineDelResponse {
   string Message = 2;
 }
 
-// 药品查找请求
-message MedicineFindRequest {
-  int32 id = 1;
-}
-
-// 药品查找响应
-message MedicineFindResponse {
-  int64 Code = 1;
-  string Message = 2;
-  ChineseMedicineInfo medicine_info = 3;
-}
 
 // 药品修改请求
 message MedicineModRequest {

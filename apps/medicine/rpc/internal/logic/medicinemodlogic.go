@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 	"google.golang.org/grpc/status"
 
 	"chineseHealthy/apps/medicine/rpc/internal/svc"
@@ -27,7 +28,8 @@ func NewMedicineModLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Medic
 func (l *MedicineModLogic) MedicineMod(in *medicine.MedicineModRequest) (*medicine.MedicineModResponse, error) {
 	// todo: add your logic here and delete this line
 	// 检查药品是否已存在
-	existingMedicine, err := l.svcCtx.MedicineInfo.FindOneByName(l.ctx, in.MedicineInfo.Name)
+	fmt.Println(in.MedicineInfo.Id)
+	existingMedicine, err := l.svcCtx.MedicineInfo.FindOneById(l.ctx, int64(in.MedicineInfo.Id))
 	if err != nil {
 		return nil, status.Error(100, "该药品不存在")
 	}
@@ -53,6 +55,7 @@ func (l *MedicineModLogic) MedicineMod(in *medicine.MedicineModRequest) (*medici
 	if err != nil {
 		return nil, status.Error(500, err.Error())
 	}
+
 	var medicineInfo = medicine.ChineseMedicineInfo{
 		Id:                int32(existingMedicine.Id),
 		Name:              existingMedicine.Name,
@@ -62,7 +65,7 @@ func (l *MedicineModLogic) MedicineMod(in *medicine.MedicineModRequest) (*medici
 		Efficacy:          existingMedicine.Efficacy.String,
 		UsageDosage:       existingMedicine.UsageDosage.String,
 		Contraindications: existingMedicine.Contraindications.String,
-		ImageUrls:         image,
+		ImageInfo:         image,
 	}
 	return &medicine.MedicineModResponse{
 		Code:         200,

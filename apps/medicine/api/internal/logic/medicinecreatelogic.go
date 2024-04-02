@@ -52,7 +52,6 @@ func (l *MedicineCreateLogic) MedicineCreate(req *types.MedicineCreateRequest) (
 			Efficacy:          res.MedicineInfo.Efficacy,
 			UsageDosage:       res.MedicineInfo.UsageDosage,
 			Contraindications: res.MedicineInfo.Contraindications,
-			ImageUrls:         nil,
 		},
 	}, nil
 }

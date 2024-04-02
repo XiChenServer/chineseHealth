@@ -6,6 +6,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"github.com/pkg/errors"
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
@@ -31,6 +32,8 @@ type (
 		Update(ctx context.Context, data *ChineseMedicineInfo) error
 		Delete(ctx context.Context, id int64) error
 		FindOneByName(ctx context.Context, name string) (*ChineseMedicineInfo, error)
+		FindOneById(ctx context.Context, id int64) (*ChineseMedicineInfo, error)
+
 	}
 
 	defaultChineseMedicineInfoModel struct {
@@ -81,6 +84,23 @@ func (m *defaultChineseMedicineInfoModel) FindOne(ctx context.Context, id int64)
 	default:
 		return nil, err
 	}
+}
+
+
+
+func (m *defaultChineseMedicineInfoModel) FindOneById(ctx context.Context, id int64) (*ChineseMedicineInfo, error) {
+	if id <= 0 {
+		return nil, errors.New("invalid ID, must be greater than zero")
+	}
+
+	query := fmt.Sprintf("SELECT %s FROM %s WHERE id = ?", medicineImagesRows, m.table)
+	var resp *ChineseMedicineInfo
+	err := m.QueryRowsNoCacheCtx(ctx, &resp, query, id)
+	if err != nil {
+		// Wrap the error for better context
+		return nil, errors.Wrap(err, "failed to fetch Chinese medicine info")
+	}
+	return resp, nil
 }
 
 

@@ -30,10 +30,12 @@ func (l *MedicineFindLogic) MedicineFind(in *medicine.MedicineFindRequest) (*med
 	if err != nil {
 		return nil, status.Error(500, err.Error())
 	}
+
 	image, err := l.svcCtx.MedicineImages.FindAllImage(l.ctx, int64(in.Id))
 	if err != nil {
 		return nil, status.Error(500, err.Error())
 	}
+
 	var medicineInfo = medicine.ChineseMedicineInfo{
 		Id:                int32(res.Id),
 		Name:              res.Name,
@@ -43,7 +45,7 @@ func (l *MedicineFindLogic) MedicineFind(in *medicine.MedicineFindRequest) (*med
 		Efficacy:          res.Efficacy.String,
 		UsageDosage:       res.UsageDosage.String,
 		Contraindications: res.Contraindications.String,
-		ImageUrls:         image,
+		ImageInfo:         image,
 	}
 
 	return &medicine.MedicineFindResponse{

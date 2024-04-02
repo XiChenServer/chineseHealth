@@ -2,15 +2,21 @@
 package types
 
 type MedicineInfo struct {
-	Id                uint64   `json:"id"`
-	Name              string   `json:"name"`
-	Alias             string   `json:"alias"`
-	Taste             string   `json:"taste"`
-	Meridian          string   `json:"meridian"`
-	Efficacy          string   `json:"efficacy"`
-	UsageDosage       string   `json:"usageDosage"`
-	Contraindications string   `json:"contraindications"`
-	ImageUrls         []string `json:"imageUrls"`
+	Id                uint64       `json:"id"`
+	Name              string       `json:"name"`
+	Alias             string       `json:"alias"`
+	Taste             string       `json:"taste"`
+	Meridian          string       `json:"meridian"`
+	Efficacy          string       `json:"efficacy"`
+	UsageDosage       string       `json:"usageDosage"`
+	Contraindications string       `json:"contraindications"`
+	ImageInfo         []*ImageInfo `json:"imageInfo"`
+}
+
+type ImageInfo struct {
+	Id         int64  `json:"id"`
+	MedicineId int64  `json:"MedicineId"`
+	Url        string `json:"url"`
 }
 
 type MedicineCreateInfo struct {
@@ -78,7 +84,7 @@ type MedicineFindResponse struct {
 }
 
 type MedicineModRequest struct {
-	Data *MedicineCreateInfo `json:"data"`
+	Data *MedicineInfo `json:"data"`
 }
 
 type MedicineModResponse struct {

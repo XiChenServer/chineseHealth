@@ -1,11 +1,10 @@
 package logic
 
 import (
-	"chineseHealthy/apps/medicine/rpc/types/medicine"
-	"context"
-
 	"chineseHealthy/apps/medicine/api/internal/svc"
 	"chineseHealthy/apps/medicine/api/internal/types"
+	"chineseHealthy/apps/medicine/rpc/types/medicine"
+	"context"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -26,7 +25,9 @@ func NewMedicineModLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Medic
 
 func (l *MedicineModLogic) MedicineMod(req *types.MedicineModRequest) (resp *types.MedicineModResponse, err error) {
 	// todo: add your logic here and delete this line
+
 	medicineInfo := medicine.ChineseMedicineInfo{
+		Id:                int32(req.Data.Id),
 		Name:              req.Data.Name,
 		Alias:             req.Data.Alias,
 		Taste:             req.Data.Taste,

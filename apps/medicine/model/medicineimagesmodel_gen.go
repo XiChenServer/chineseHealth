@@ -3,6 +3,7 @@
 package model
 
 import (
+	"chineseHealthy/apps/medicine/rpc/types/medicine"
 	"context"
 	"database/sql"
 	"fmt"
@@ -30,7 +31,7 @@ type (
 		FindOne(ctx context.Context, id int64) (*MedicineImages, error)
 		Update(ctx context.Context, data *MedicineImages) error
 		Delete(ctx context.Context, id int64) error
-		FindAllImage(ctx context.Context, id int64) ([]string, error)
+		FindAllImage(ctx context.Context, id int64) ([]*medicine.ImageInfo, error)
 	}
 
 	defaultMedicineImagesModel struct {
@@ -78,19 +79,25 @@ func (m *defaultMedicineImagesModel) FindOne(ctx context.Context, id int64) (*Me
 	}
 }
 
-func (m *defaultMedicineImagesModel)FindAllImage(ctx context.Context, id int64) ([]string, error) {
-	query := fmt.Sprintf("SELECT %s FROM %s WHERE medicine_id = %s", medicineImagesRows, m.table, id)
+func (m *defaultMedicineImagesModel) FindAllImage(ctx context.Context, id int64) ([]*medicine.ImageInfo, error) {
+	query := fmt.Sprintf("SELECT %s FROM %s WHERE medicine_id = ?", medicineImagesRows, m.table)
 	var resp []*MedicineImages
-	var urls []string
-	err := m.QueryRowsNoCacheCtx(ctx,&resp,query)
-	if err != nil{
+	var ans []*medicine.ImageInfo
+	err := m.QueryRowsNoCacheCtx(ctx, &resp, query, id)
+	fmt.Println(id)
+	if err != nil {
+		fmt.Println(err.Error())
 		return nil, err
 	}
-	for _, v := range resp{
-		urls = append(urls, v.ImageUrl)
+	for _, v := range resp {
+		newImageInfo := &medicine.ImageInfo{
+			Id:         v.Id,
+			MedicineId: v.MedicineId,
+			Url:        v.ImageUrl,
+		}
+		ans = append(ans, newImageInfo)
 	}
-
-	return urls, nil
+	return ans, nil
 }
 
 
