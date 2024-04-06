@@ -83,6 +83,14 @@ type MedicineFindResponse struct {
 	Data    *MedicineInfo `json:"data"`
 }
 
+type LookMedicineVagueRequest struct {
+	Key string `json:"key"`
+}
+
+type LookMedicineVagueResponse struct {
+	Data []*MedicineInfo `json:"data"`
+}
+
 type MedicineModRequest struct {
 	Data *MedicineInfo `json:"data"`
 }

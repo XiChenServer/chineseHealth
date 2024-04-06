@@ -80,6 +80,13 @@ type (
 		Message string        `json:"message"`
 		Data    *MedicineInfo `json:"data"`
 	}
+	//药的模糊搜索
+	LookMedicineVagueRequest {
+		Key string `json:"key"`
+	}
+	LookMedicineVagueResponse {
+		Data []*MedicineInfo `json:"data"`
+	}
 
 	// 药品修改
 	MedicineModRequest {
@@ -102,6 +109,7 @@ service Medicine {
 
 	@handler ImageDelete
 	post /api/image/delete(ImageDelRequest) returns (ImageDelResponse)
+
 }
 
 service Medicine {
@@ -116,4 +124,7 @@ service Medicine {
 
 	@handler MedicineMod
 	post /api/medicine/mod(MedicineModRequest) returns (MedicineModResponse)
+
+	@handler LookMedicine
+	post /api/medicine/vague(LookMedicineVagueRequest) returns (LookMedicineVagueResponse)
 }

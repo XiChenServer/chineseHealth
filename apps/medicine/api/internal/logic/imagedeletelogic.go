@@ -30,9 +30,6 @@ func (l *ImageDeleteLogic) ImageDelete(req *types.ImageDelRequest) (resp *types.
 	if err != nil {
 		return nil, err
 	}
-	return &types.ImageDelResponse{
-		Code:    200,
-		Message: "删除成功",
-	}, nil
+	return &types.ImageDelResponse{}, nil
 
 }

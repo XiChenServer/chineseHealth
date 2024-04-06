@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"chineseHealthy/pkg/response"
 	"net/http"
 
 	"chineseHealthy/apps/medicine/api/internal/logic"
@@ -20,12 +21,13 @@ func ImageDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := logic.NewImageDeleteLogic(r.Context(), svcCtx)
 		resp, err := l.ImageDelete(&req)
-		if err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
-		} else {
-			httpx.OkJsonCtx(r.Context(), w, resp)
-		}
-		//response.Response(r, w, resp, err)
+		//if err != nil {
+		//	httpx.ErrorCtx(r.Context(), w, err)
+		//} else {
+		//	httpx.OkJsonCtx(r.Context(), w, resp)
+		//
+		//}
+		response.HttpResult(r, w, resp, err)
 
 	}
 }

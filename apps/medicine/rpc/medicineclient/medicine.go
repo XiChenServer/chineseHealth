@@ -14,6 +14,8 @@ import (
 
 type (
 	ChineseMedicineInfo    = medicine.ChineseMedicineInfo
+	FindMedicineRequest    = medicine.FindMedicineRequest
+	FindMedicineResponse   = medicine.FindMedicineResponse
 	ImageCreateRequest     = medicine.ImageCreateRequest
 	ImageCreteResponse     = medicine.ImageCreteResponse
 	ImageDelRequest        = medicine.ImageDelRequest
@@ -35,6 +37,7 @@ type (
 		MedicineFind(ctx context.Context, in *MedicineFindRequest, opts ...grpc.CallOption) (*MedicineFindResponse, error)
 		ImageCreate(ctx context.Context, in *ImageCreateRequest, opts ...grpc.CallOption) (*ImageCreteResponse, error)
 		ImageDelete(ctx context.Context, in *ImageDelRequest, opts ...grpc.CallOption) (*ImageDelResponse, error)
+		FindMedicine(ctx context.Context, in *FindMedicineRequest, opts ...grpc.CallOption) (*FindMedicineResponse, error)
 	}
 
 	defaultMedicine struct {
@@ -76,4 +79,9 @@ func (m *defaultMedicine) ImageCreate(ctx context.Context, in *ImageCreateReques
 func (m *defaultMedicine) ImageDelete(ctx context.Context, in *ImageDelRequest, opts ...grpc.CallOption) (*ImageDelResponse, error) {
 	client := medicine.NewMedicineClient(m.cli.Conn())
 	return client.ImageDelete(ctx, in, opts...)
+}
+
+func (m *defaultMedicine) FindMedicine(ctx context.Context, in *FindMedicineRequest, opts ...grpc.CallOption) (*FindMedicineResponse, error) {
+	client := medicine.NewMedicineClient(m.cli.Conn())
+	return client.FindMedicine(ctx, in, opts...)
 }

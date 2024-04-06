@@ -50,8 +50,6 @@ func (l *MedicineModLogic) MedicineMod(req *types.MedicineModRequest) (resp *typ
 		Info = append(Info, newInfo)
 	}
 	return &types.MedicineModResponse{
-		Code:    200,
-		Message: "修改成功",
 		Data: &types.MedicineInfo{
 			Id:                uint64(res.MedicineInfo.Id),
 			Name:              res.MedicineInfo.Name,

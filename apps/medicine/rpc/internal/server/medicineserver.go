@@ -51,3 +51,8 @@ func (s *MedicineServer) ImageDelete(ctx context.Context, in *medicine.ImageDelR
 	l := logic.NewImageDeleteLogic(ctx, s.svcCtx)
 	return l.ImageDelete(in)
 }
+
+func (s *MedicineServer) FindMedicine(ctx context.Context, in *medicine.FindMedicineRequest) (*medicine.FindMedicineResponse, error) {
+	l := logic.NewFindMedicineLogic(ctx, s.svcCtx)
+	return l.FindMedicine(in)
+}

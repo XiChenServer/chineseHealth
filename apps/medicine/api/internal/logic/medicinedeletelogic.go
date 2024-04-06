@@ -30,8 +30,5 @@ func (l *MedicineDeleteLogic) MedicineDelete(req *types.MedicineDelRequest) (res
 	if err != nil {
 		return nil, err
 	}
-	return &types.MedicineDelResponse{
-		Code:    200,
-		Message: "删除成功",
-	}, nil
+	return &types.MedicineDelResponse{}, nil
 }

@@ -29,6 +29,7 @@ func NewImageUpdataLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Image
 func (l *ImageUpdataLogic) ImageUpdata(r *http.Request) (resp *types.ImageUpdataResponse, err error) {
 	// todo: add your logic here and delete this line
 	file, handler, err := r.FormFile("file")
+
 	if err != nil {
 		fmt.Println(err)
 		return nil, err
@@ -40,8 +41,6 @@ func (l *ImageUpdataLogic) ImageUpdata(r *http.Request) (resp *types.ImageUpdata
 	}
 
 	return &types.ImageUpdataResponse{
-		Code:    200,
-		Message: "上传成功",
-		Data:    url,
+		Data: url,
 	}, nil
 }

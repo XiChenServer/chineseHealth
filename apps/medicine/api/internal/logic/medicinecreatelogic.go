@@ -41,8 +41,6 @@ func (l *MedicineCreateLogic) MedicineCreate(req *types.MedicineCreateRequest) (
 		return nil, err
 	}
 	return &types.MedicineCreateResponse{
-		Code:    200,
-		Message: "创建成功",
 		Data: types.MedicineInfo{
 			Id:                uint64(res.MedicineInfo.Id),
 			Name:              res.MedicineInfo.Name,

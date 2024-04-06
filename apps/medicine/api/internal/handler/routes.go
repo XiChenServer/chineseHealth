@@ -52,6 +52,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/medicine/mod",
 				Handler: MedicineModHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/medicine/vague",
+				Handler: LookMedicineHandler(serverCtx),
+			},
 		},
 	)
 }

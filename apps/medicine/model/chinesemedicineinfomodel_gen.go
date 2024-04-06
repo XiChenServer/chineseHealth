@@ -33,7 +33,7 @@ type (
 		Delete(ctx context.Context, id int64) error
 		FindOneByName(ctx context.Context, name string) (*ChineseMedicineInfo, error)
 		FindOneById(ctx context.Context, id int64) (*ChineseMedicineInfo, error)
-
+		FindMedicineVague(ctx context.Context, keyword string) (*[]ChineseMedicineInfo, error)
 	}
 
 	defaultChineseMedicineInfoModel struct {
@@ -120,6 +120,25 @@ func (m *defaultChineseMedicineInfoModel) FindOneByName(ctx context.Context, nam
 		return nil, err
 	}
 }
+
+
+func (m *defaultChineseMedicineInfoModel) FindMedicineVague(ctx context.Context, keyword string) (*[]ChineseMedicineInfo, error) {
+	var results []ChineseMedicineInfo
+	query := fmt.Sprintf(`
+        SELECT * FROM %s
+        WHERE name LIKE '%%%s%%'
+           OR alias LIKE '%%%s%%'
+           OR taste LIKE '%%%s%%'
+           OR meridian LIKE '%%%s%%'
+           OR efficacy LIKE '%%%s%%'
+    `, m.table, keyword, keyword, keyword, keyword, keyword)
+
+	m.QueryRowsNoCacheCtx(ctx,&results,query)
+
+	return &results, nil
+}
+
+
 
 func (m *defaultChineseMedicineInfoModel) Insert(ctx context.Context, data *ChineseMedicineInfo) (sql.Result, error) {
 	chineseMedicineInfoIdKey := fmt.Sprintf("%s%v", cacheChineseMedicineInfoIdPrefix, data.Id)

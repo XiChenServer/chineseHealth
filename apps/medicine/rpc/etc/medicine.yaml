@@ -1,5 +1,5 @@
 Name: medicine.rpc
-ListenOn: 0.0.0.0:8000
+ListenOn: 0.0.0.0:18000
 Etcd:
   Hosts:
   - 127.0.0.1:2379

@@ -30,8 +30,5 @@ func (l *ImageCreateLogic) ImageCreate(req *types.ImageCreateRequest) (resp *typ
 		Urls:       req.Urls,
 		MedicineId: int64(req.MedicineId),
 	})
-	return &types.ImageCreateResponse{
-		Code:    200,
-		Message: "创建成功",
-	}, nil
+	return &types.ImageCreateResponse{}, nil
 }

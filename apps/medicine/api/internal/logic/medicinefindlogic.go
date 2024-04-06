@@ -51,8 +51,6 @@ func (l *MedicineFindLogic) MedicineFind(req *types.MedicineFindRequest) (resp *
 	}
 	medicineInfo.ImageInfo = Info
 	return &types.MedicineFindResponse{
-		Code:    200,
-		Message: "查找成功",
-		Data:    &medicineInfo,
+		Data: &medicineInfo,
 	}, nil
 }
