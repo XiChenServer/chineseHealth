@@ -1,0 +1,26 @@
+syntax = "proto3";
+package article;
+option go_package = "./article";
+
+message ArticleInfo{
+  uint32 id = 1;
+  string title = 2;
+  string content = 3;
+  string image = 4;
+  string author = 5;
+}
+
+
+message LookAllArticlesRequest{
+
+}
+message LookAllArticlesResponse{
+  repeated ArticleInfo articles_data = 1;
+}
+
+service Article {
+  rpc LookAllArticles(LookAllArticlesRequest) returns (LookAllArticlesResponse);
+}
+
+//  goctl rpc protoc ./rpc/article.proto --go_out=./rpc/types --go-grpc_out=./rpc/types --zrpc_out=./rpc
+

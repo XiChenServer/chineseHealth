@@ -7,7 +7,12 @@ import (
 	"mime/multipart"
 )
 
-const ()
+const (
+	AccessKey = "y_XTiaH5dywx_R-J-twejWCQRXvBd5jI54YT9ihT"
+	SerectKey = "2g0S7zGWZ_zca0BVwYTeugUoZJepYLsYjd5bKGir"
+	Bucket    = "chinese-healthy"
+	ImgUrl    = "http://sb7apcs0c.hn-bkt.clouddn.com/"
+)
 
 // 封装上传图片到七牛云然后返回状态和图片的url
 func UploadToQiNiu(file multipart.File, fileSize int64) (string, error) {

@@ -1,0 +1,51 @@
+import(
+	"apis/medicine.api"
+	"apis/article.api"
+)
+
+@server (
+	prefix: /article
+	group: article
+)
+service App{
+	//查看医学文章
+	@handler LookAllArticles
+	post /look/all_articles(LookAllArticleRequest) returns (LookAllArticleResponse)
+}
+
+@server (
+	prefix: /image
+	group: image
+)
+service App {
+	@handler ImageCreate
+	post /create(ImageCreateRequest) returns (ImageCreateResponse)
+
+	@handler ImageUpdata
+	post /updata() returns (ImageUpdataResponse)
+
+	@handler ImageDelete
+	post /delete(ImageDelRequest) returns (ImageDelResponse)
+
+}
+
+@server (
+	prefix: /medicine
+	group: medicine
+)
+service App {
+	@handler MedicineCreate
+	post /create(MedicineCreateRequest) returns (MedicineCreateResponse)
+
+	@handler MedicineDelete
+	post /delete(MedicineDelRequest) returns (MedicineDelResponse)
+
+	@handler MedicineFind
+	post /find(MedicineFindRequest) returns (MedicineFindResponse)
+
+	@handler MedicineMod
+	post /mod(MedicineModRequest) returns (MedicineModResponse)
+
+	@handler LookMedicine
+	post /vague(LookMedicineVagueRequest) returns (LookMedicineVagueResponse)
+}

@@ -132,7 +132,6 @@ func (m *defaultChineseMedicineInfoModel) FindMedicineVague(ctx context.Context,
            OR meridian LIKE '%%%s%%'
            OR efficacy LIKE '%%%s%%'
     `, m.table, keyword, keyword, keyword, keyword, keyword)
-
 	m.QueryRowsNoCacheCtx(ctx,&results,query)
 
 	return &results, nil

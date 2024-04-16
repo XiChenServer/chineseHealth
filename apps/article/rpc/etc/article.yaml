@@ -1,0 +1,14 @@
+Name: article.rpc
+ListenOn: 0.0.0.0:18001
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: article.rpc
+
+MySQL:
+  Host: 127.0.0.1
+  Port: 3306
+  User: root
+  Password: root
+  Database: medicine
+  TablePrefix: ""

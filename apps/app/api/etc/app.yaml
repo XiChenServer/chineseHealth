@@ -1,0 +1,24 @@
+Name: App
+Host: 0.0.0.0
+Port: 19000
+
+
+Mysql:
+  DataSource: root:root@tcp(127.0.0.1:3306)/medicine?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Pass:
+    Type: node
+
+MedicineRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: medicine.rpc
+
+ArticleRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: article.rpc

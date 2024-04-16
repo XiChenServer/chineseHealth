@@ -1,0 +1,101 @@
+type MedicineInfo {
+	Id                uint64       `json:"id"`
+	Name              string       `json:"name"`
+	Alias             string       `json:"alias"`
+	Taste             string       `json:"taste"`
+	Meridian          string       `json:"meridian"`
+	Efficacy          string       `json:"efficacy"`
+	UsageDosage       string       `json:"usageDosage"`
+	Contraindications string       `json:"contraindications"`
+	ImageInfo         []*ImageInfo `json:"imageInfo"`
+}
+
+type ImageInfo {
+	Id         int64  `json:"id"`
+	MedicineId int64  `json:"MedicineId"`
+	Url        string `json:"url"`
+}
+type MedicineCreateInfo {
+	Name              string `json:"name"`
+	Alias             string `json:"alias"`
+	Taste             string `json:"taste"`
+	Meridian          string `json:"meridian"`
+	Efficacy          string `json:"efficacy"`
+	UsageDosage       string `json:"usageDosage"`
+	Contraindications string `json:"contraindications"`
+}
+
+type (
+	ImageCreateRequest {
+		MedicineId uint64   `json:"medicineId"`
+		Urls       []string `json:"urls"`
+	}
+
+	ImageCreateResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+	ImageUpdataResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+		Data    string `json:"data"`
+	}
+	ImageDelRequest {
+		Id uint64 `json:"id"`
+	}
+
+	ImageDelResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+
+	// 药品创建
+	MedicineCreateRequest {
+		Data *MedicineCreateInfo `json:"data"`
+	}
+
+	MedicineCreateResponse {
+		Code    int64        `json:"code"`
+		Message string       `json:"message"`
+		Data    MedicineInfo `json:"data"`
+	}
+
+	// 药品删除
+	MedicineDelRequest {
+		Id uint64 `json:"id"`
+	}
+
+	MedicineDelResponse {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+
+	// 药品查找
+	MedicineFindRequest {
+		Id uint64 `json:"id"`
+	}
+
+	MedicineFindResponse {
+		Code    int64         `json:"code"`
+		Message string        `json:"message"`
+		Data    *MedicineInfo `json:"data"`
+	}
+	//药的模糊搜索
+	LookMedicineVagueRequest {
+		Key string `json:"key"`
+	}
+	LookMedicineVagueResponse {
+		Data []*MedicineInfo `json:"data"`
+	}
+
+	// 药品修改
+	MedicineModRequest {
+		Data *MedicineInfo `json:"data"`
+	}
+
+	MedicineModResponse {
+		Code    int64         `json:"code"`
+		Message string        `json:"message"`
+		Data    *MedicineInfo `json:"data"`
+	}
+)

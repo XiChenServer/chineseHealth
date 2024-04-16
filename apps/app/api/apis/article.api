@@ -1,0 +1,19 @@
+info(
+    title :"文章管理"
+    desc: "查看文章"
+    version: "v1"
+)
+type ArticleInfo{
+    Id uint32 `json:"id"`
+    Title string `json:"title"`
+    Content string `json:"content"`
+    Image string `json:"image"`
+    Author string `json:"author"`
+}
+
+type LookAllArticleRequest{
+
+}
+type LookAllArticleResponse{
+    Data []*ArticleInfo `json:"data"`
+}
