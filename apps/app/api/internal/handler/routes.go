@@ -72,6 +72,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/vague",
 				Handler: medicine.LookMedicineHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/look/all",
+				Handler: medicine.LookAllMedicineHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/medicine"),
 	)

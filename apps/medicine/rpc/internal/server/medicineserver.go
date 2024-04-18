@@ -56,3 +56,8 @@ func (s *MedicineServer) FindMedicine(ctx context.Context, in *medicine.FindMedi
 	l := logic.NewFindMedicineLogic(ctx, s.svcCtx)
 	return l.FindMedicine(in)
 }
+
+func (s *MedicineServer) ViewAll(ctx context.Context, in *medicine.ViewAllRequest) (*medicine.ViewAllResponse, error) {
+	l := logic.NewViewAllLogic(ctx, s.svcCtx)
+	return l.ViewAll(in)
+}

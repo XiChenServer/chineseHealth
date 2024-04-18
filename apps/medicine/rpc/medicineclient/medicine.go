@@ -29,6 +29,8 @@ type (
 	MedicineFindResponse   = medicine.MedicineFindResponse
 	MedicineModRequest     = medicine.MedicineModRequest
 	MedicineModResponse    = medicine.MedicineModResponse
+	ViewAllRequest         = medicine.ViewAllRequest
+	ViewAllResponse        = medicine.ViewAllResponse
 
 	Medicine interface {
 		MedicineCreate(ctx context.Context, in *MedicineCreateRequest, opts ...grpc.CallOption) (*MedicineCreateResponse, error)
@@ -38,6 +40,7 @@ type (
 		ImageCreate(ctx context.Context, in *ImageCreateRequest, opts ...grpc.CallOption) (*ImageCreteResponse, error)
 		ImageDelete(ctx context.Context, in *ImageDelRequest, opts ...grpc.CallOption) (*ImageDelResponse, error)
 		FindMedicine(ctx context.Context, in *FindMedicineRequest, opts ...grpc.CallOption) (*FindMedicineResponse, error)
+		ViewAll(ctx context.Context, in *ViewAllRequest, opts ...grpc.CallOption) (*ViewAllResponse, error)
 	}
 
 	defaultMedicine struct {
@@ -84,4 +87,9 @@ func (m *defaultMedicine) ImageDelete(ctx context.Context, in *ImageDelRequest, 
 func (m *defaultMedicine) FindMedicine(ctx context.Context, in *FindMedicineRequest, opts ...grpc.CallOption) (*FindMedicineResponse, error) {
 	client := medicine.NewMedicineClient(m.cli.Conn())
 	return client.FindMedicine(ctx, in, opts...)
+}
+
+func (m *defaultMedicine) ViewAll(ctx context.Context, in *ViewAllRequest, opts ...grpc.CallOption) (*ViewAllResponse, error) {
+	client := medicine.NewMedicineClient(m.cli.Conn())
+	return client.ViewAll(ctx, in, opts...)
 }

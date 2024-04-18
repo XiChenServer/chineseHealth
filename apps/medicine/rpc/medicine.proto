@@ -106,6 +106,13 @@ message FindMedicineResponse{
 }
 
 
+message ViewAllRequest{
+
+}
+message ViewAllResponse{
+  repeated ChineseMedicineInfo medicine_info = 1;
+}
+
 service Medicine {
   rpc MedicineCreate(MedicineCreateRequest) returns (MedicineCreateResponse);
   rpc MedicineDel(MedicineDelRequest) returns (MedicineDelResponse);
@@ -114,4 +121,6 @@ service Medicine {
   rpc ImageCreate(ImageCreateRequest) returns (ImageCreteResponse);
   rpc ImageDelete(ImageDelRequest) returns (ImageDelResponse);
   rpc FindMedicine(FindMedicineRequest) returns (FindMedicineResponse);
+
+  rpc ViewAll(ViewAllRequest) returns (ViewAllResponse);
 }

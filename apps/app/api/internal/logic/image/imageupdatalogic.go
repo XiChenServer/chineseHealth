@@ -1,7 +1,10 @@
 package image
 
 import (
+	"chineseHealthy/pkg"
 	"context"
+	"fmt"
+	"net/http"
 
 	"chineseHealthy/apps/app/api/internal/svc"
 	"chineseHealthy/apps/app/api/internal/types"
@@ -23,8 +26,21 @@ func NewImageUpdataLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Image
 	}
 }
 
-func (l *ImageUpdataLogic) ImageUpdata() (resp *types.ImageUpdataResponse, err error) {
+func (l *ImageUpdataLogic) ImageUpdata(r *http.Request) (resp *types.ImageUpdataResponse, err error) {
 	// todo: add your logic here and delete this line
+	file, handler, err := r.FormFile("file")
 
-	return
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+	defer file.Close()
+	url, err := pkg.UploadToQiNiu(file, handler.Size)
+	if err != nil {
+		return nil, err
+	}
+
+	return &types.ImageUpdataResponse{
+		Data: url,
+	}, nil
 }

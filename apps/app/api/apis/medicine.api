@@ -98,4 +98,10 @@ type (
 		Message string        `json:"message"`
 		Data    *MedicineInfo `json:"data"`
 	}
+	ViewAllResquest{
+
+	}
+	ViewAllResponse{
+		Data []*MedicineInfo `json:"data"`
+	}
 )

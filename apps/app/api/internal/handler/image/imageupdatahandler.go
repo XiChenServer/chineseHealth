@@ -11,7 +11,7 @@ import (
 func ImageUpdataHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		l := image.NewImageUpdataLogic(r.Context(), svcCtx)
-		resp, err := l.ImageUpdata()
+		resp, err := l.ImageUpdata(r)
 		//if err != nil {
 		//	httpx.ErrorCtx(r.Context(), w, err)
 		//} else {

@@ -26,6 +26,7 @@ const (
 	Medicine_ImageCreate_FullMethodName    = "/medicine.Medicine/ImageCreate"
 	Medicine_ImageDelete_FullMethodName    = "/medicine.Medicine/ImageDelete"
 	Medicine_FindMedicine_FullMethodName   = "/medicine.Medicine/FindMedicine"
+	Medicine_ViewAll_FullMethodName        = "/medicine.Medicine/ViewAll"
 )
 
 // MedicineClient is the client API for Medicine service.
@@ -39,6 +40,7 @@ type MedicineClient interface {
 	ImageCreate(ctx context.Context, in *ImageCreateRequest, opts ...grpc.CallOption) (*ImageCreteResponse, error)
 	ImageDelete(ctx context.Context, in *ImageDelRequest, opts ...grpc.CallOption) (*ImageDelResponse, error)
 	FindMedicine(ctx context.Context, in *FindMedicineRequest, opts ...grpc.CallOption) (*FindMedicineResponse, error)
+	ViewAll(ctx context.Context, in *ViewAllRequest, opts ...grpc.CallOption) (*ViewAllResponse, error)
 }
 
 type medicineClient struct {
@@ -112,6 +114,15 @@ func (c *medicineClient) FindMedicine(ctx context.Context, in *FindMedicineReque
 	return out, nil
 }
 
+func (c *medicineClient) ViewAll(ctx context.Context, in *ViewAllRequest, opts ...grpc.CallOption) (*ViewAllResponse, error) {
+	out := new(ViewAllResponse)
+	err := c.cc.Invoke(ctx, Medicine_ViewAll_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MedicineServer is the server API for Medicine service.
 // All implementations must embed UnimplementedMedicineServer
 // for forward compatibility
@@ -123,6 +134,7 @@ type MedicineServer interface {
 	ImageCreate(context.Context, *ImageCreateRequest) (*ImageCreteResponse, error)
 	ImageDelete(context.Context, *ImageDelRequest) (*ImageDelResponse, error)
 	FindMedicine(context.Context, *FindMedicineRequest) (*FindMedicineResponse, error)
+	ViewAll(context.Context, *ViewAllRequest) (*ViewAllResponse, error)
 	mustEmbedUnimplementedMedicineServer()
 }
 
@@ -150,6 +162,9 @@ func (UnimplementedMedicineServer) ImageDelete(context.Context, *ImageDelRequest
 }
 func (UnimplementedMedicineServer) FindMedicine(context.Context, *FindMedicineRequest) (*FindMedicineResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindMedicine not implemented")
+}
+func (UnimplementedMedicineServer) ViewAll(context.Context, *ViewAllRequest) (*ViewAllResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ViewAll not implemented")
 }
 func (UnimplementedMedicineServer) mustEmbedUnimplementedMedicineServer() {}
 
@@ -290,6 +305,24 @@ func _Medicine_FindMedicine_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Medicine_ViewAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ViewAllRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicineServer).ViewAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Medicine_ViewAll_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicineServer).ViewAll(ctx, req.(*ViewAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Medicine_ServiceDesc is the grpc.ServiceDesc for Medicine service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -324,6 +357,10 @@ var Medicine_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FindMedicine",
 			Handler:    _Medicine_FindMedicine_Handler,
+		},
+		{
+			MethodName: "ViewAll",
+			Handler:    _Medicine_ViewAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

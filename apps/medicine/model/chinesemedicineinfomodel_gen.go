@@ -34,6 +34,7 @@ type (
 		FindOneByName(ctx context.Context, name string) (*ChineseMedicineInfo, error)
 		FindOneById(ctx context.Context, id int64) (*ChineseMedicineInfo, error)
 		FindMedicineVague(ctx context.Context, keyword string) (*[]ChineseMedicineInfo, error)
+		FindAllMedicine(ctx context.Context) (*[]ChineseMedicineInfo, error)
 	}
 
 	defaultChineseMedicineInfoModel struct {
@@ -137,6 +138,15 @@ func (m *defaultChineseMedicineInfoModel) FindMedicineVague(ctx context.Context,
 	return &results, nil
 }
 
+
+func (m *defaultChineseMedicineInfoModel) FindAllMedicine(ctx context.Context) (*[]ChineseMedicineInfo, error){
+	var results []ChineseMedicineInfo
+	query := fmt.Sprintf(`
+        SELECT * FROM %s
+    `, m.table)
+	m.QueryRowsNoCacheCtx(ctx,&results,query)
+	return &results, nil
+}
 
 
 func (m *defaultChineseMedicineInfoModel) Insert(ctx context.Context, data *ChineseMedicineInfo) (sql.Result, error) {

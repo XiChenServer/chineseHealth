@@ -48,4 +48,7 @@ service App {
 
 	@handler LookMedicine
 	post /vague(LookMedicineVagueRequest) returns (LookMedicineVagueResponse)
+
+	@handler LookAllMedicine
+	post /look/all(ViewAllResquest) returns (ViewAllResponse)
 }

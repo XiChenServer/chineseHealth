@@ -101,6 +101,13 @@ type MedicineModResponse struct {
 	Data    *MedicineInfo `json:"data"`
 }
 
+type ViewAllResquest struct {
+}
+
+type ViewAllResponse struct {
+	Data []*MedicineInfo `json:"data"`
+}
+
 type ArticleInfo struct {
 	Id      uint32 `json:"id"`
 	Title   string `json:"title"`

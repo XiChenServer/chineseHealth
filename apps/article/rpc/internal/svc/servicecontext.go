@@ -1,8 +1,10 @@
 package svc
 
 import (
+	"chineseHealthy/apps/article/model"
 	"chineseHealthy/apps/article/rpc/internal/config"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"log"
 )
@@ -18,7 +20,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
-
+	db.AutoMigrate(&model.Article{})
 	return &ServiceContext{
 		Config: c,
 		DB:     db,

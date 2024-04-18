@@ -1,6 +1,7 @@
 package image
 
 import (
+	"chineseHealthy/apps/medicine/rpc/types/medicine"
 	"context"
 
 	"chineseHealthy/apps/app/api/internal/svc"
@@ -25,6 +26,10 @@ func NewImageCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Image
 
 func (l *ImageCreateLogic) ImageCreate(req *types.ImageCreateRequest) (resp *types.ImageCreateResponse, err error) {
 	// todo: add your logic here and delete this line
+	_, err = l.svcCtx.MedicineRpc.ImageCreate(l.ctx, &medicine.ImageCreateRequest{
+		Urls:       req.Urls,
+		MedicineId: int64(req.MedicineId),
+	})
+	return &types.ImageCreateResponse{}, nil
 
-	return
 }
